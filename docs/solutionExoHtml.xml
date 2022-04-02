@@ -1,0 +1,221 @@
+
+<sect1>
+    <title>Correction de l'exercice Table Ascii - OCP DIP</title>
+  <para>Coad et Mayfield [Java Design] préconisent la stratégie suivante :</para>
+<orderedlist>
+ <listitem><para><foreignphrase>Rechercher la caractéristique polymorphe</foreignphrase></para>
+ <para>Le jeu de caractères ? Possible si on étend ceux-ci au jeu UNICODE.</para>
+ <para>La représentation des valeurs ordinales de chacun des caractères affichés ? Certainement, c'est déjà ce que réalise le programme.</para>
+ <para>On retiendra donc cette dernière caractéristique : <emphasis>Représentation des nombres.</emphasis></para>
+ </listitem>
+ <listitem><para><foreignphrase>Identifier un ensemble de noms de méthodes correspondant à cette caractéristique</foreignphrase></para>
+ <para>L'objectif étant de représenter une valeur ordinales, un entier, dans une base donnée constituée de symboles, eux-même représentés sous la forme d'un caractère. Une suite ordonnée de caractères est un type bien connu (String), nous proposons de nommer l'opération : </para>
+ <para><programlisting>
+ String toString(int n)
+ </programlisting></para>
+ <para>Une fonction dont la valeur (une chaîne de caractère) est la représention du nombre (n) qu'elle recoit en argument.</para>
+ </listitem>
+ <listitem><para><foreignphrase>Ajouter une interface</foreignphrase></para>
+ <programlisting>
+ interface Representation {
+   String toString(int n);
+ }
+</programlisting>
+ </listitem>
+ <listitem><para><foreignphrase>Identifier les implémentations</foreignphrase></para>
+ <para>
+ Concevons les deux classes d'implémentation de l'interface <foreignphrase>Representation</foreignphrase> qui réalisent la représentation en base 10 et en base 2, conformément à l'existant. Rappel, les fonctionalités qui existent avant une activité de refactoring, doivent absolument être retrouvées après la refonte du code. </para>
+ <programlisting>
+ class Decimal implements Representation {
+  public String toString(int i) {  
+      return String.valueOf(i);
+  }
+}
+
+class Binaire implements Representation {
+  public String toString(int i) {  
+     return Integer.toBinaryString(i);
+  }
+}
+ </programlisting>
+ <para>Modifions la partie qui décide de la représentation des nombres à appliquer (limitée actuellement à seulement deux représentations possibles) en la couplant à un objet, nommé <foreignphrase>repr</foreignphrase>, de type <foreignphrase>Représentation</foreignphrase>. </para>
+ <para>L'ancien code : </para>
+ <programlisting>
+<![CDATA[
+    System.out.println("<table border=\"1\"> <tr>");
+    System.out.println("<td bgcolor=\"teal\" align=\"center\">");
+    switch (this.typeRepr) {
+      case 'd' :
+         System.out.println(toDecString(i));
+         break;
+      case 'b' :
+         System.out.println(toBinString(i));
+         break;
+      default :
+         System.out.println(toDecString(i));
+    }
+    System.out.println("</td></tr><tr>");
+    System.out.println("<td bgcolor=\"#CC3300\" align=\"center\">");
+    System.out.println(" &#" + i + "; </td></tr></table></td>");
+]]>
+ </programlisting>
+ <para>Le nouveau code :</para>
+ <programlisting>
+<![CDATA[
+    System.out.println("<table border=\"1\"> <tr>");
+    System.out.println("<td bgcolor=\"teal\" align=\"center\">");
+
+    System.out.println(repr.toString(i)); 
+
+    System.out.println("</td></tr><tr>");
+    System.out.println("<td bgcolor=\"#CC3300\" align=\"center\">");
+    System.out.println(" &#" + i + "; </td></tr></table></td>");
+]]>
+ </programlisting>
+ <para>L'objet responsable de la représentation des valeurs ordinales est fournit par l'appelant à la création de l'application.</para>
+ <programlisting>
+  public TableAsciiToHTML(Representation repr) {
+      this.repr = repr;
+      printHTML();
+  }
+ </programlisting>
+ </listitem>
+ 
+</orderedlist>
+
+  <sect2>
+    <title>Listing de la solution</title>
+    <para>
+      <programlisting>
+<![CDATA[
+
+interface Representation {
+  String toString(int i);
+}
+
+class Decimal implements Representation {
+  public String toString(int i) {  
+      return String.valueOf(i);
+  }
+}
+
+class Binaire implements Representation {
+  public String toString(int i) {  
+     return Integer.toBinaryString(i);
+  }
+}
+
+class TableAsciiToHTML {
+  private Representation repr;
+
+  public TableAsciiToHTML(Representation repr) {
+      this.repr = repr;
+      printHTML();
+  }
+ 
+  private void printHTML() {
+    int deb = 32;
+    int fin = 128;
+    int nbCol = 10;
+    int cpt = 0;
+    System.out.println("<html><head /><body><center><h1>TABLE DE CARACTERES<h1>");
+    System.out.println("<table border=\"1\">");
+    System.out.println("<tr>");
+    for (int i = deb; i < fin; i++, cpt++) {
+      if (cpt%nbCol == 0) {
+         if (i>deb)  System.out.println("</tr>");
+         System.out.println("<tr>");
+      }
+      System.out.println("<td align=\"center\"");
+      System.out.println("<table border=\"1\"> <tr>");
+      System.out.println("<td bgcolor=\"teal\" align=\"center\">");
+      
+      System.out.println(repr.toString(i));
+
+      System.out.println("</td></tr><tr>");
+      System.out.println("<td bgcolor=\"#CC3300\" align=\"center\">");
+      System.out.println(" &#" + i + "; </td></tr></table></td>");
+    }
+    System.out.println("</table></center></body></html>");
+  }
+  
+}
+
+class AppTableAscii {
+  public static void main(String[] args) {
+     String arg = (args.length>0) ? args[0] : "Decimal";
+     try {
+         Class c = Class.forName(arg);
+         Representation repr = (Representation) c.newInstance();
+         TableAsciiToHTML app = new TableAsciiToHTML(repr);
+     }
+     catch (ClassNotFoundException e) {
+       System.out.println("Erreur : " + arg + " n'est pas une classe implémentée.");
+     }
+     catch (InstantiationException e) {
+       System.out.println("Erreur : " + arg + " n'est pas n'est pas du type attendu.");
+     }
+     catch (IllegalAccessException e) {
+       System.out.println("Erreur : " + arg + " n'est pas accessible.");
+     }
+  }
+}
+]]>      
+      </programlisting>
+    </para>
+  </sect2>
+  <sect2><title>Test</title>
+  <para>Nous allons maintenant tester la qualité <foreignphrase>Ouvert-Fermé</foreignphrase>, due au respect d'<foreignphrase>OCP</foreignphrase> (POF Principe d'Ouverture/Fermeture).</para>
+  <para>Créons une nouvelle classe d'implémentation de <foreignphrase>Representation</foreignphrase>.</para>
+  <programlisting>
+public class Hexadecimal implements Representation {
+  public String toString(int n) {
+    return Integer.toHexString(n);
+  }
+}
+  </programlisting>
+<para>Après compilation, nous exécutons le programme en lui passant en argument le nom de cette nouvelle classe. </para>  
+<programlisting>
+  java AppTableAscii Hexadecimal > res.html
+</programlisting>
+<para>Le tour est joué.</para>
+ </sect2>
+ <sect2><title>Conclusion</title>
+<para>Nous venons d'étendre le comportement de l'application sans intervenir sur son code.</para>
+<para>Nous avons pour cela respecté OCP (POF) et appliqué DIP (PID).</para>
+<note><title>Fichier de configuration XML</title>
+<para>Notez que la fonction d'instanciation "paramétrée" est très souvent déléguée à une classe spécialisée (<emphasis>factory</emphasis>). Celle-ci puise très souvent les informations dont elle a besoin dans un (ou plusieurs) fichiers de configuration XML. Exemple (extrait d'un fichier de configuration d'une application Struts): </para>
+<programlisting>
+<![CDATA[
+ <form-beans>
+   <form-bean
+      name="addQuestionForm"
+      type="org.reseaucerta.qcm.presentation.AddQuestionForm"/>
+      ...
+ </form-beans>
+
+ <!--  Action Mapping Definitions  -->
+ <action-mappings>
+    <action path="/addQuestion"
+      type="org.reseaucerta.qcm.application.AddQuestionAction"
+      name="addQuestionForm"
+      scope="session"
+      validate="true"
+      input="/jsp/addQuestion.jsp">
+      <forward
+         name="success"
+         path="/jsp/confirmAddQuestion.jsp"/>
+      <forward
+         name="echec"
+         path="/jsp/echecAddQuestion.jsp"/>
+    </action>
+    ... 
+ <action-mappings>
+]]>
+</programlisting>
+
+</note>
+  </sect2>
+
+</sect1>  
+

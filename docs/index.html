@@ -1,0 +1,653 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Sensibilisation aux principes fondamentaux en conception et programmation objet et design pattern</title><link rel="stylesheet" href="dbx-style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><meta name="description" content="Ce document a été réalisé sous GNU/Linux avec vim, au format docbook , mis en page avec le processeur XSLT saxon développé par Michael Kay et les feuilles de styles de Norman Walsh."><meta http-equiv="pragma" content="no-cache"><meta http-equiv="cache-control" content="no-cache"><meta http-equiv="expires" content="-1"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article" lang="fr"><div class="titlepage"><div><div><h2 class="title"><a name="index"></a>Sensibilisation aux principes fondamentaux en conception et programmation objet et design pattern</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Olivier</span> <span class="surname">Capuozzo</span></h3></div></div><div><p class="pubdate">07 mars 2004</p></div><div><div class="revhistory"><table border="1" width="100%" summary="Revision history"><tr><th align="left" valign="top" colspan="3"><b>Historique des versions</b></th></tr>
+        <tr><td align="left">Version 0.1</td><td align="left">29 Aoùt 2004</td><td align="left">kpu</td></tr><tr><td align="left" colspan="3">Nouveau chapitre : Rappel concepts objet et UML</td></tr>
+        <tr><td align="left">Version 0.2</td><td align="left">06 Février 2004</td><td align="left">kpu</td></tr><tr><td align="left" colspan="3">Retouche de la note Java et héritage</td></tr>
+
+
+   </table></div></div><div><div class="abstract"><p class="title"><b>Résumé</b></p><p>Ce document a été réalisé sous GNU/Linux avec <a class="ulink" href="http://www.vim.org" target="_top">vim</a>, au format <a class="ulink" href="http://www.oasis-open.org/docbook/" target="_top"> docbook </a>, mis en page avec le processeur XSLT <a class="ulink" href="http://saxon.sourceforge.net" target="_top"> saxon</a> développé par Michael Kay et les feuilles de styles de  <a class="ulink" href="http://nwalsh.com/" target="_top">Norman Walsh</a>.</p></div></div></div><hr></div><div class="toc"><p><b>Table des matières</b></p><dl><dt><span class="sect1"><a href="#id2478824">1. Introduction à la notion de principes de conception objet</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ref">1.1. Références</a></span></dt><dt><span class="sect2"><a href="#id2476825">1.2. Approche objet du logiciel</a></span></dt><dt><span class="sect2"><a href="#id2481145">1.3. Activités de programmation</a></span></dt><dt><span class="sect2"><a href="#id2481233">1.4. Logicel flexible</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2481309">2. Rappels de quelques concepts objet et d'éléments de notation UML</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2481317">2.1. Gestion des dépendances</a></span></dt><dt><span class="sect2"><a href="#id2481371">2.2. Représentation des relations avec UML</a></span></dt><dt><span class="sect2"><a href="#id2477357">2.3. Représentation des associations et dépendances entre classes</a></span></dt><dt><span class="sect2"><a href="#id2477424">2.4. Les 2 grandes fonctions de l'héritage</a></span></dt><dt><span class="sect2"><a href="#id2529582">2.5. Différentes perspectives d'une vue</a></span></dt><dt><span class="sect2"><a href="#id2529695">2.6. Exercices</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2529763">3. Quelques grands principes</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2529768">3.1. Avertissement : YAGNI</a></span></dt><dt><span class="sect2"><a href="#id2529826">3.2. Principe d'Ouverture/Fermeture</a></span></dt><dt><span class="sect2"><a href="#id2530265">3.3. Principe de Substitution de Liskov</a></span></dt><dt><span class="sect2"><a href="#id2530401">3.4. Principe d'Inversion de Contrôle</a></span></dt><dt><span class="sect2"><a href="#id2530728">3.5. Remarque</a></span></dt><dt><span class="sect2"><a href="#id2530757">3.6. Principe de séparation des interfaces</a></span></dt><dt><span class="sect2"><a href="#id2530836">3.7. Principe de Réutilisation par Composition</a></span></dt><dt><span class="sect2"><a href="#id2531062">3.8. Exercice</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2531914">4. Correction de l'exercice Table Ascii - OCP DIP</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2532097">4.1. Listing de la solution</a></span></dt><dt><span class="sect2"><a href="#id2532112">4.2. Test</a></span></dt><dt><span class="sect2"><a href="#id2532233">4.3. Conclusion</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2531530">5. Initiation au design pattern Factory</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2531535">5.1. Introduction</a></span></dt><dt><span class="sect2"><a href="#id2531713">5.2. Factory (Fabrique)</a></span></dt><dt><span class="sect2"><a href="#id2532340">5.3. Travaux pratiques</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2532468">6. Exemple de solution</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2532473">6.1. Introduction</a></span></dt><dt><span class="sect2"><a href="#id2532525">6.2. Listing 1</a></span></dt><dt><span class="sect2"><a href="#id2532564">6.3. Listing 3</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2532631">7. Conclusion</a></span></dt></dl></div><div class="sect1" lang="fr"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2478824"></a>1. Introduction à la notion de principes de conception objet</h2></div></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="ref"></a>1.1. Références</h3></div></div></div><div class="itemizedlist"><ul type="disc"><li><p>[Meyer] Conception et programmation orientées objet . Bertrand Meyer. Ed. Eyrolles. Juin 2000</p></li><li><p>[Gof] Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides, Addison-Wesley 1999.</p></li><li><p>[<a class="ulink" href="http://objectmentor.com" target="_top">MARTIN00</a>] Design Principles and Design Patterns par Robert C. Martin.</p></li><li><p>[<a class="ulink" href="http://www.design-up.com" target="_top">Principes avancés de conception objet</a>] un dossier d'introduction, en Français, sur ce thème, par l'équipe de <span class="foreignphrase"><em class="foreignphrase">Design-up</em></span>. A lire à la suite de cet article.</p></li><li><p>[Java Design] Buidling better apps &amp; applets par Peter Coad et Mark Mayfield ed. Prentice Hall PTR</p></li><li><p>[JOUP]  Objects, UML and Process par Kirk Knoernshild ed. Addison-Wesley, 2002.</p></li><li><p>[Larman] UML et les Design Patterns par Graig Larman, ed. CampusPress, 2002.</p></li><li><p>[Kent Beck] Extreme Programming la référence, ed. CampusPress, 2002.</p></li><li><p>[Robert C. Martin] UML for Java Programmers, ed. Prentice Hall, 2003.</p></li></ul></div><div class="itemizedlist"><p class="title"><b>Objectifs</b></p><ul type="disc"><li><p>Présenter les principaux principes en conception et programmation objet</p></li><li><p>Exemple de mise en oeuvre de ces principes et exercices</p></li></ul></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2476825"></a>1.2. Approche objet du logiciel</h3></div></div></div><p>"Un système bien conçu est facile à comprendre, facile à modifier et facile à réutiliser" (in UML for Java programmers, R. C. Martin, ouvrage mentionné ici <a class="xref" href="#ref" title="1.1. Références">Références</a>). </p><p>Les principales qualités visées par l'approche objet sont la Robustesse, Maintenabilité, Extensibilité et Réutilisabilité.
+  </p><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>Robustesse</em></span>: Présence et respect de pré et post conditions, conforme à l'esprit de la <span class="foreignphrase"><em class="foreignphrase">programmation par contrat</em></span> de B. Meyer. Gestion des exceptions.</p></li><li><p><span class="emphasis"><em>Maintenabilité</em></span> : Respect de conventions d'écriture et présence de tests unitaires.</p></li><li><p><span class="emphasis"><em>Extensibilité</em></span> : Représentation des parties stables par des classes concrètes. Abstraction des parties extensibles.</p></li><li><p><span class="emphasis"><em>Réutilisabilité</em></span> Gestion des dépendances (interfaces, classes et paquetages) en vue d'une réutilisation dans une autre application.</p></li></ul></div><p>A eux seuls, les concepts objets ne suffisent pas à produire des logiciels de qualité.</p><p>La mise en oeuvre, et le maintien, de ces qualités est assurée par le respect de cetains principes tout au long du cycle de vie du système. </p><p>Bien entendu, on peut faire sans ; sans respecter les principes, sans respecter les modèles de réalisation de ces principes, cette "liberté" est représentée par la figure ci-dessous :</p><div class="figure"><a name="id2477033"></a><p class="title"><b>Figure 1. Production de code et outils de conception </b></p><div class="figure-contents"><div><img src="schemaPDP.png" alt="Production de code et outils de conception"></div></div></div><br class="figure-break"><p>Alors que les principes décrivent QUOI faire, les <span class="foreignphrase"><em class="foreignphrase">designs patterns</em></span> (modèles de conception) montrent COMMENT le faire, dans un contexte donné. Quant aux frameworks (solution d'architecture applicative), ils démontrent, à leur manière, comment implémenter certains Designs Patterns pour les besoins d'un service générique. </p><p>Nous verrons quelques principes fondamentaux, et quelques exemples d'application.</p></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2481145"></a>1.3. Activités de programmation</h3></div></div></div><p>Il est courant de partionner le travail du développeur en 3 activités : l'analyse, la conception et l'implémentation.</p><p>
+En <span class="bold"><strong>analyse</strong></span>, l'accent est mis sur les <span class="emphasis"><em>responsabiltés</em></span> des objets et leurs <span class="emphasis"><em>collaborations</em></span> en vue de répondre à des besoins exprimés, par exemple sous la forme de <span class="emphasis"><em>cas d'utilisation</em></span>.</p><p>
+En <span class="bold"><strong>conception</strong></span>, les responsabilités sont traduites en <span class="emphasis"><em>opérations</em></span> (+ ou - typées). C'est ici que les décisions d'application de modèles de conception (designs patterns), ou d'adoption de frameworks, sont le plus souvent prises (recherche d'une fléxibilité).
+</p><p>Lors de l'activité d'<span class="bold"><strong>implémentation</strong></span> les tests sont codés (approche <span class="emphasis"><em>test first</em></span>), les opérations sont traduites en méthodes avec, éventuellement, une décomposition foctionnelle de ces dernières (et introduction de méthodes privées).
+</p><p>Ces activités sont très souvent enchevétrées : ainsi analyse t-on en implémentant des tests, le choix d'un pattern de conception s'impose parfois naturellement qu'après une réalisation. </p></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2481233"></a>1.4. Logicel flexible</h3></div></div></div><p>Il est connu qu'un logiciel commence à mourir le jour de sa livraison (lorsqu'il est terminé).</p><p><span class="emphasis"><em>lorsque les besoins commencent à changer, le système commence à mourir, et sa survie est son challenge.</em></span> (Kirk Knoernshild, in "JOUP").</p><p>Un logiciel flexible est un logiciel qui accepte les changements sans (ou avec très peu) de modifications de code.</p><p>Le pari s'avère d'autant plus difficile que le changement fait partie de la nature même des besoins.</p><p>Tout l'art est alors d'identifier les parties sujettes aux changements afin de les <span class="bold"><strong>abstraire</strong></span>, limitant ainsi les associations entre classes. Malheureusement cette pratique augmente la complexité du système.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Coût de la fléxibilité"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left">Coût de la fléxibilité</th></tr><tr><td align="left" valign="top"><p><span class="emphasis"><em>Ce qui est flexible est complexe</em></span></p><p>Il toute fois préférable de limiter la compléxité. Il s'agit donc de concilier fléxibilité et simplicité de conception.</p><p>La complexité peut être cachée par l'adoption d'un framework, mais le système devient alors dépendant de celui-ci.</p></td></tr></table></div></div></div><div class="sect1" lang="fr"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2481309"></a>2. Rappels de quelques concepts objet et d'éléments de notation UML</h2></div></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2481317"></a>2.1. Gestion des dépendances</h3></div></div></div><p>La recherche de la qualité en programmation objet tient en quelques mots : <span class="emphasis"><em>Gestion des dépendances</em></span> (dépendance entre classes, dépendances entre paquetages). L'objetif étant de limiter les dépendances entre parties impémentées, pour une meilleure reutilisation, maintenance et flexibilité. </p><p>Le code source ne nous permet pas de distinguer clairement les dépendances entre des classes. Les clauses import donne des indications, mais sont parfois abusives.</p><p>Comment représenter ces dépendances ? par un diagramme UML.</p><p>UML devenant ainsi un outil d'aide à la décision.</p><p>Un élément A est dépendant d'un élément B lorsque la définition de A inclus celle de B.</p><p>Il y a dépendance chaque fois qu'une relation existe entre des éléments.</p></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2481371"></a>2.2. Représentation des relations avec UML</h3></div></div></div><p>
+UML définit quatre relations entre éléments : Association, Généralisation, Réalisation et Dépendance.
+  </p><div class="figure"><a name="id2481384"></a><p class="title"><b>Figure 2. Association</b></p><div class="figure-contents"><div><img src="association.png" alt="Association"></div></div></div><br class="figure-break"><div class="figure"><a name="id2481396"></a><p class="title"><b>Figure 3. Généralisation</b></p><div class="figure-contents"><div><img src="generalisation.png" alt="Généralisation"></div></div></div><br class="figure-break"><div class="figure"><a name="id2477300"></a><p class="title"><b>Figure 4. Réalisation</b></p><div class="figure-contents"><div><img src="realisation.png" alt="Réalisation"></div></div></div><br class="figure-break"><div class="figure"><a name="id2477313"></a><p class="title"><b>Figure 5. Dépendance</b></p><div class="figure-contents"><div><img src="dependance.png" alt="Dépendance"></div></div></div><br class="figure-break"><p>Parmi les associations, on distingue les agrégations et compositions.</p><div class="figure"><a name="id2477331"></a><p class="title"><b>Figure 6. Agrégation</b></p><div class="figure-contents"><div><img src="agregation.png" alt="Agrégation"></div></div></div><br class="figure-break"><div class="figure"><a name="id2477344"></a><p class="title"><b>Figure 7. Exemple (extrait des specs. UML 1.4)</b></p><div class="figure-contents"><div><img src="polygonUML.png" alt="Exemple (extrait des specs. UML 1.4)"></div></div></div><br class="figure-break"></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2477357"></a>2.3. Représentation des associations et dépendances entre classes</h3></div></div></div><p>Le relations se classent en deux catégories : <span class="emphasis"><em>à long terme</em></span> et <span class="emphasis"><em>à court terme</em></span>.</p><div class="itemizedlist"><ul type="disc"><li><p>Relation à long terme</p><p>Une relation entre deux objets est qualifiée de <span class="emphasis"><em>structurelle</em></span> lorsque la durée de vie du lien de cette relation est supérieure à la durée de vie du message qui lie ces objets. Dans ce cas nous avons à faire à une <span class="emphasis"><em>association</em></span> (le plus souvent représentée par un attribut).</p></li><li><p>Relation à court terme</p><p> Une <span class="emphasis"><em>dépendance</em></span> (au sens relation UML) est l'expression d'un lien à court terme, qui ne dure que le temps d'exécution d'un message (passage d'arguments, variable locale, par exemple.).</p></li></ul></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2477424"></a>2.4. Les 2 grandes fonctions de l'héritage</h3></div></div></div><p>Dans la pratique, il y a trois principales raisons d'utiliser l'héritage :</p><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>Héritage d'interface</em></span> : Utilisé pour le <span class="emphasis"><em><span class="emphasis"><em>polymorphisme</em></span></em></span> et associé à la notion de <span class="emphasis"><em>type</em></span>.</p><div class="orderedlist"><ol type="1"><li><p>Une classe hérite d'une interface : On dit que la classe <span class="emphasis"><em>réalise</em></span> (implémente) une interface (donne corps aux opérations).</p></li><li><p>Une interface hérite d'une autre interface : Création d'un <span class="emphasis"><em>sous-type</em></span>, par extension du contrat (ajout de nouvelles opérations).</p></li></ol></div></li><li><p><span class="emphasis"><em>Héritage d'implémentation</em></span> : Utilisé pour la <span class="emphasis"><em><span class="emphasis"><em>réutilisation</em></span></em></span>. </p><div class="orderedlist"><ol type="1"><li><p>Une classe hérite d'une autre classe. Une partie du code est « <span class="quote">ouverte</span> » aux classes descendantes, ce qui fait dire par certains que l'héritage d'implémentation tue l'encapsulation.</p></li></ol></div></li></ul></div><p>Les langages ne font pas toujours une distinction nette de ces concepts. En effet une classe est présentée comme un tout composé d'une interface (un type) <span class="emphasis"><em>et</em></span> d'une implémentation.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Java et l'héritage"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left">Java et l'héritage</th></tr><tr><td align="left" valign="top"><p>Java fait la différence entre l'héritage d'interface (<span class="emphasis"><em>implements</em></span>) et l'héritage d'implémentation (<span class="emphasis"><em>extends</em></span>). Une classe peut être vue comme un type (opérations publiques) et une implémentation (méthodes et attributs), dans ces conditions une classe peut se dispenser de référencer explicitement une interface. </p><pre class="programlisting">
+<span class="bold"><strong>class</strong></span> Vehicule {                              <span class="bold"><strong>interface</strong></span> IFVehicule {
+   private String immatriculation;                public String getImmatriculation();
+   ...                                   &lt;==&gt; }
+   public String getImmatriculation() {        <span class="bold"><strong>class</strong></span> Vehicule <span class="bold"><strong>implements</strong></span> IFVehicule { 
+      return this.immatriculation;                private String immatriculation; 
+   }                                              ...
+   ...                                            public String getImmatriculation() { 
+}                                                    return this.immatriculation; 
+                                                  }
+                                              }   
+</pre><p>Un objet peut jouer plusieurs rôles (sa classe implémente plusieurs interfaces).</p><p>Un même rôle peut être joué par des objets de classes différentes (qui implémente la même interface).</p></td></tr></table></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2529582"></a>2.5. Différentes perspectives d'une vue</h3></div></div></div><p>Les diagrammes UML ne sont pas figés à un niveau de détail, un même point de vue peut être représenté avec différents niveaux de granularité. On retient généralement 3 niveaux <span class="emphasis"><em>conceptuel, spécification</em></span> et <span class="emphasis"><em>implémentation</em></span>,  (Cook, S. and Daniels, J. Designing Object Systems: object-oriented modeling with Syntropy, Prentice Hall International, Hemel Hempstead, UK, 1994.), mentionnés par Martin Fowler <a class="ulink" href="http://www2.awl.com/cseng/titles/0-201-89542-0/techniques/class.htm" target="_top"> ici </a>.</p><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>Conceptuel</em></span> : niveau essentiel [Cook, Daniels], domaine métier [Catalysis]</p></li><li><p><span class="emphasis"><em>Spécifications</em></span> : interface (des composants [Catalysis])</p></li><li><p><span class="emphasis"><em>Implémentation</em></span> : vue interne, proche du code (internal design [Catalysis])</p></li></ul></div><p>Certaines pratiques [Catalysis, XP] ajoutent à cet axe vertical (du plus haut - conceptuel - au plus bas  - le code -), un axe horizontal précisant la <span class="emphasis"><em>portée</em></span> (<span class="emphasis"><em>scope</em></span>). Par exemple un diagramme montrant une collaboration d'objets, gagnerait à préciser le niveau (par exemple Spécification) et la portée (par exemple le sous-système que cette collaboration sert, ou le cas d'utilisation concerné).</p><div class="figure"><a name="id2529666"></a><p class="title"><b>Figure 8. Niveaux et impacts</b></p><div class="figure-contents"><div><img src="niveauxUML.png" alt="Niveaux et impacts"></div></div></div><br class="figure-break"><p><span class="emphasis"><em>Exemple</em></span></p><div class="figure"><a name="id2529682"></a><p class="title"><b>Figure 9. Trois perspectives</b></p><div class="figure-contents"><div><img src="3perspectives.png" alt="Trois perspectives"></div></div></div><br class="figure-break"></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2529695"></a>2.6. Exercices</h3></div></div></div><p><span class="emphasis"><em>Exercice 1</em></span></p><p>Produire un diagramme de classe UML à partir des éléments ci-dessous.</p><pre class="programlisting">
+class Point { 
+  protected int x; 
+  protected int y; 
+  public int getX(){return this.x;} 
+  public void setX(int nouv_x){
+    if (this.x != nouv_x)
+       this.x = nouv_x;
+  } 
+  public int getY(){return this.y;}
+  public void setY(int nouv_y){
+    if (this.y != nouv_y) 
+      this.y = nouv_y;
+  }
+  public Point() { super(); } 
+}
+class Point3D extends Point { 
+  protected int z; 
+  public int getZ(){return this.z;} 
+  public void setZ(int nouv_z) {
+    if (this.z != nouv_z) 
+      this.z = nouv_z;
+  }
+  public Point3D() {super();}
+}
+
+interface Colorable { 
+  public int getCouleur(); 
+  public void setCouleur(int couleur); 
+} 
+
+class Point3DCouleur extends Point3D implements Colorable { 
+  protected int couleur; 
+  public int getCouleur() {return this.couleur;} 
+  public void setCouleur (int couleur) { this.couleur = couleur; } 
+  public Point3DCouleur() {super();} 
+}
+</pre><p><span class="emphasis"><em>Exercice 2</em></span></p><p>Concevoir un diagramme de classe fidèle à l'implémentation du modèle <span class="emphasis"><em>pull</em></span> du design pattern Observateur [Gof] ci-dessous :</p><pre class="programlisting">
+public interface Observer {
+  public void update(Observable o); 
+}
+ 
+public class Observable {
+  Collection observateurs; 
+  public void notify() { 
+    Iterator it = observateurs.iterator();
+    while (it.hasNext()) {
+        Observer obs = (Observer) it.next();
+        obs.update(this);
+    }
+  }
+
+public void addObserver(Observer o) { observateurs.add(o); }
+  ... 
+}
+  
+public class Bilan extends Observable {
+    void setChange() { notify(); }
+    ... 
+} 
+  
+public class UIGraphe implements Observer { 
+    public UIGraphe(Observable o) { o.addObserver(this); } 
+    public void update(Observable o) { 
+       Bilan unbilan = (Bilan) o; 
+       double compteResultat = unbilan.getCompteResultat();
+       ... 
+    } 
+    ... 
+}
+
+</pre></div></div><div class="sect1" lang="fr"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2529763"></a>3. Quelques grands principes</h2></div></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2529768"></a>3.1. Avertissement : YAGNI</h3></div></div></div><p>En conception (<span class="emphasis"><em>design</em></span>), il n'existe pas de règles strictes à appliquer, à l'image des <span class="emphasis"><em>formes normales</em></span> en analyse de données (quitte à les enfreindre ensuite), mais des principes guidant la conception.</p><p>Pourquoi parler de guides et non de règles ?</p><p>Il n'est pas conseiller de vouloir toujours "faire du générique tout de suite", au risque de consommer du temps inutilement.</p><p>YAGNI veut dire <span class="emphasis"><em>"You aren't gonna need it"</em></span> (<span class="bold"><strong>Vous n'allez pas avoir besoin de lui</strong></span>). C'est un principe de précaution fondamental d'Extreme Programming, qui invite à la simplicité, mais pas n'importe laquelle... Si le sujet vous intéresse, l'ouvrage de Kent Beck est reconnu comme une excellente introduction en la matière (<a class="xref" href="#ref" title="1.1. Références">Références</a>).</p></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2529826"></a>3.2. Principe d'Ouverture/Fermeture</h3></div></div></div><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>Principe d'Ouverture/Fermeture ---- <span class="emphasis"><em>Open-Closed Principle - OCP</em></span></em></span></p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: OCP"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left">OCP</th></tr><tr><td align="left" valign="top"><pre class="programlisting"><span class="emphasis"><em>Tout module (package, classe, méthode) doit être ouvert aux extensions mais fermé
+aux modifications.
+
+</em></span></pre></td></tr></table></div><p>Ce principe, que l'on doit au travail de Bertrand Meyer, est considéré comme le plus important des principes en conception objet [JOUP]. Ces implications sont nombreuses (Design by Contrat) et font l'objet d'autres principes (LSP, DIP...).</p><div class="itemizedlist"><ul type="circle"><li><p><span class="emphasis"><em>Ouvert aux extensions</em></span></p><p>Comprendre : le <span class="emphasis"><em>comportement</em></span> du système devrait être <span class="emphasis"><em>extensible</em></span>. En effet, aucun système n'est à l'abri de nouveaux besoins. Les parties changeantes d'un système doivent être abtraites, offrant ainsi une ouverture pour d'autres implémentation que celles initialement prévues.</p><p>Techniques utilisées : Abstraction (classe abstraite, interface), polymorphisme (ne pas tester le type d'un objet avant de lui envoyer un message) et sous-traitance d'instanciation (factory).</p></li><li><p><span class="emphasis"><em>Fermé aux modifications</em></span></p><p>L'implémentation des classes/opérations/attributs ne doit pas être soumise aux changements.</p><p>Techniques utilisées :</p><div class="itemizedlist"><ul type="square"><li><p>Rendre <span class="emphasis"><em>privés</em></span> tous les attributs (principe de rétention d'information de B. Meyer)</p></li><li><p>Seuls sont visibles (<span class="emphasis"><em>public</em></span>), les méthodes qui implémentent les opérations (une « <span class="quote">opération</span> » réalise un service).</p></li><li><p>Les invariants algorithmiques sont implémentés, les parties changeantes sont représentées par des méthodes abstraites.</p></li></ul></div></li></ul></div><p>Illustration</p><div class="figure"><a name="id2529964"></a><p class="title"><b>Figure 10. Non respect d'OCP</b></p><div class="figure-contents"><div><img src="no-ocp-1.png" alt="Non respect d'OCP"></div></div></div><br class="figure-break"><p>Cet exemple ne respecte pas OCP :</p><div class="itemizedlist"><ul type="circle"><li><p>Les attributs ne sont pas cachés (le signe + signifie <span class="emphasis"><em>public</em></span>).</p></li><li><p>La méthode <span class="emphasis"><em>getSalaire</em></span> n'est pas ouverte aux changements (une nouvelle catégorie de personnel nécessitera de recoder le comportement de cette méthode, en autres).</p></li></ul></div><div class="figure"><a name="id2530005"></a><p class="title"><b>Figure 11. Non respect d'OCP</b></p><div class="figure-contents"><div><img src="no-ocp-2.png" alt="Non respect d'OCP"></div></div></div><br class="figure-break"><p>Cet exemple ne respecte pas OCP :</p><div class="itemizedlist"><ul type="circle"><li><p>Les attributs ne sont pas cachés.</p></li><li><p>La méthode <span class="emphasis"><em>getSalaire</em></span>  n'est toutjours pas ouverte aux changements, elle a besoin de tester la classe de l'instance dans sa définition (n'utilise pas le polymorphisme).</p></li></ul></div><div class="figure"><a name="id2530041"></a><p class="title"><b>Figure 12. Non respect d'OCP</b></p><div class="figure-contents"><div><img src="no-ocp-3.png" alt="Non respect d'OCP"></div></div></div><br class="figure-break"><p>Cet exemple ne respecte pas OCP :</p><div class="itemizedlist"><ul type="circle"><li><p>Les attributs ne sont pas cachés aux classes descendantes.</p></li><li><p>Si elle n'est utilisée que par <span class="emphasis"><em>getSalaire</em></span>, la méthode <span class="emphasis"><em>calculerCommission</em></span> devrait être cachée.</p></li></ul></div><div class="figure"><a name="id2530080"></a><p class="title"><b>Figure 13. Respect d'OCP</b></p><div class="figure-contents"><div><img src="yes-ocp.png" alt="Respect d'OCP"></div></div></div><br class="figure-break"><p>Nous appliquons OCP à la classe <code class="literal">Représentant</code> si nous "gelons" la méthode <code class="literal">Représentant::getSalaire</code> et ne fournissons aucun moyen aux classes descendantes de modifier le <code class="literal">ca</code>.</p><p>Une classe descendante, par exemple <code class="literal">ReprésentantInterim hérite de Représentant</code>, pourra personnaliser le comportement de <code class="literal">Représentant::getSalaire</code> en implémentant différement la méthode protégée <code class="literal">ReprésentantInterim::calculerCommission</code>.</p><p>La plupart du temps ce type de solution fait intervenir une <code class="literal">Interface</code>.</p><p><span class="emphasis"><em>Quand appliquer OCP ?</em></span></p><p>
+Les données devraient toujours être cachées. Dans ce cas, elles ne sont accessibles par des opérations (dite <span class="emphasis"><em>getter/setter</em></span> ou par un mecanisme plus puissant : les propriétés, <span class="emphasis"><em>property</em></span>, respectant ainsi le principe d'accès uniforme de B. Meyer).</p><p>Par contre, il convient d'être plus réservé quant à une mise en oeuvre systématique de l'abstraction (via des interfaces) qui augmente de façon non négligeable le nombre de classes du système, et le temps de développment. On appliquera OCP sur des parties « <span class="quote"> qui en valent la peine</span> », à forte probalité de changements.</p><p>A ce sujet, <a class="ulink" href="http://www.design-up.com" target="_top">Design-Up</a> nous conseille <span class="emphasis"><em>d'identifier correctement les points d'ouverture/fermeture de l'application, en s'inspirant :</em></span></p><div class="itemizedlist"><ul type="circle"><li><p><span class="emphasis"><em>Des besoins d'évolutivité exprimés par le client</em></span></p></li><li><p><span class="emphasis"><em>Des besoins de flexibilité pressentis par les développeurs</em></span></p></li><li><p><span class="emphasis"><em>Des changements répétés constatés au cours du développement</em></span></p></li></ul></div><p><span class="emphasis"><em>La mise en oeuvre de ce principe reste donc une affaire de bon sens, sachant que la meilleure heuristique reste la suivante : <span class="emphasis"><em>on n'applique l'OCP que lorsque cela simplifie le design.</em></span></em></span>
+</p></li><li><p><span class="emphasis"><em>Technique utilisée</em></span></p><div class="itemizedlist"><ul type="circle"><li><p>Implémenter les parties stables (classe, méthode) et abstraire les parties changeantes (interface) - voir le design pattern Template/Hook - </p></li><li><p>Encapsuler systématiquement les attributs.</p></li></ul></div></li></ul></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2530265"></a>3.3. Principe de Substitution de Liskov</h3></div></div></div><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>Principe de Substitution de Liskov ---<span class="emphasis"><em>Liskov Substitution Principle - LSP</em></span></em></span></p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: LSP"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left">LSP</th></tr><tr><td align="left" valign="top"><p><span class="emphasis"><em>Les méthodes qui utilisent des objets d'une classe doivent pouvoir utiliser des objets dérivés de cette classe sans même le savoir.</em></span></p></td></tr></table></div><p>LSP est le fruit d'un travail du Barbara Liskov qui est dérivé du concept de <span class="emphasis"><em>Design by Contrat</em></span> de Bertrand Meyer, en particulier les notions de pré-condition et post-condition.</p><p>Une <span class="emphasis"><em>pré-condition</em></span> est un contrat que doit respecter le client d'un service. Si une pré-condition d'un méthode ne peut être respectée, cette méthode ne doit pas être appelée.</p><p>Une <span class="emphasis"><em>post-condition</em></span> est un contrat que doit respecter le fournisseur d'un service. Si une méthode ne peut assurée une post-condition, elle ne doit pas retourner.</p></li><li><p><span class="emphasis"><em>Quand appliquer LSP ?</em></span></p><p>Chaque fois que l'héritage est mise en oeuvre : Héritage d'implémentation (redéfinition de méthodes) et héritage d'interface (redéfinition de assertions).</p><p></p></li><li><p><span class="emphasis"><em>Technique utilisée</em></span></p><p>Contrôler les contrats par une gestion des exceptions.</p><p>Remarque : Il est très difficile, en l'absence de pré et post conditions, de vérifier le respect de ce principe.</p><p>Les pré-conditions définies par les sous-classes ne doivent pas être plus restrictives que celles héritées.</p><p>Les post-conditions définies par les sous-classes ne doivent pas être plus larges que celles héritées.</p><p><span class="emphasis"><em>Exemple de non respect de LSP</em></span></p><pre class="programlisting">
+ interface A {
+  /**
+   @pre  : x in [1..10]
+   @post : m(x) in [1..20]
+  */
+   int m(int x) throws NumberFormatException;
+ }
+ 
+ interface B extends A {
+  /**
+   @pre  : x in [1..5]
+   @post : m(x) in [0..20]
+  */
+  int m(int x) throws Exception;
+ }
+
+ class C implements B {
+  public int  m(int x) throws NumberFormatException { 
+    System.out.println("C::m()");
+    throw new NumberFormatException();
+  }
+ }
+</pre></li></ul></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2530401"></a>3.4. Principe d'Inversion de Contrôle</h3></div></div></div><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>Principe d'Inversion de Contrôle ---<span class="emphasis"><em>Inversion Of Control Principle - IoC </em></span></em></span> connu également sous le nom de <span class="emphasis"><em>Principe d'Inversion de Dépendance ---<span class="emphasis"><em>Dependency Inversion Principle - DIP</em></span></em></span></p><p>Voir ici : <a class="ulink" href="http://www.betaversion.org/~stefano/linotype/news/38/" target="_top">IoC</a>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: IoC - DIP"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left">IoC - DIP</th></tr><tr><td align="left" valign="top"><pre class="programlisting"><span class="emphasis"><em>
+A. Les modules de haut niveau ne doivent pas dépendre de modules de bas niveau.
+   Tous deux doivent dépendre d'abstractions. 
+   
+B. Les abstractions ne doivent pas dépendre de détails. 
+   Les détails doivent dépendre d'abstractions.
+
+</em></span></pre></td></tr></table></div><p>IoC. Contrairement aux idées reçues, les modules de haut niveau ne doivent pas nécessairement dépendre directement de modules de bas niveau. Si cette dépendance existe, le changement d'un module de bas niveau risque d'avoir un impact direct sur l'ensemble des modules qui lui sont dépendants (recompilation en chaîne).</p><p>Illustration (<span class="emphasis"><em>Design-up</em></span>).</p><div class="figure"><a name="id2530478"></a><p class="title"><b>Figure 14. Avant DIP (Design-up)</b></p><div class="figure-contents"><div><img src="avantDIP.png" alt="Avant DIP (Design-up)"></div></div></div><br class="figure-break"><p>Selon ce principe, la relation de dépendance doit être inversée :<span class="emphasis"><em>Les modules de bas niveau doivent se conformer à des interfaces définies et utilisées par les modules de haut niveau.</em></span></p><div class="figure"><a name="id2530501"></a><p class="title"><b>Figure 15. Après DIP (Design-up)</b></p><div class="figure-contents"><div><img src="apresDIP.png" alt="Après DIP (Design-up)"></div></div></div><br class="figure-break"></li><li><p><span class="emphasis"><em>Quand appliquer IoC - DIP ?</em></span></p><p>Pour la conception de modules génériques. Le cas le plus typique est bien entendu le <span class="emphasis"><em>framework</em></span>, qui est par nature hautement réutilisable.</p><p>Lorsque que l'OCP est fortement envisagé.</p></li><li><p><span class="emphasis"><em>Technique utilisée</em></span></p><p>Ce sont les techniques utilisées pour OCP, couplées avec LSP.</p><p>Plus précisemment, lorsqu'un module A dépend d'un module de bas niveau B (couplage concret), on crée une interface I que le module A utilise (couplage abstrait) et le module B réalise.  Le module A est alors libéré du module B, devenu substituable.</p><div class="figure"><a name="id2530561"></a><p class="title"><b>Figure 16. Appliquer DIP</b></p><div class="figure-contents"><div><img src="dip.png" alt="Appliquer DIP"></div></div></div><br class="figure-break"><p><span class="emphasis"><em>Exemple de non respect de DIP</em></span></p><pre class="programlisting">
+class Client {
+  OracleDB oracle;
+  ...
+  static Client getInstance(String id){
+    Client res = null;
+    String sql = "Select ...";
+    ...
+    ResultSet rs = oracle.execute(sql);
+    ...
+    return res;
+  }
+}
+
+class OracleDB {
+  String chaineConnect = "...";
+  ...
+  ResultSet execute(String sql) { ... }
+  ...
+}
+</pre><p><span class="emphasis"><em>Même exemple respectant DIP</em></span></p><pre class="programlisting">
+class Client {
+  <span class="bold"><strong>DB db;</strong></span>
+  ...
+  static Client getInstance(String id){
+    Client res = null;
+    String sql = "Select ...";
+    ...
+    ResultSet rs = <span class="bold"><strong>db</strong></span>.execute(sql);
+    ...
+    return res;
+  }
+}
+
+<span class="bold"><strong>interface DB</strong></span> {
+  ...
+  ResultSet execute(String sql);
+  ...
+}
+
+class OracleDB <span class="bold"><strong>implements DB</strong></span> {
+  String chaineConnect = "...";
+  ...
+  ResultSet execute(String sql) { ... }
+  ...
+}
+</pre><p> </p><div class="figure"><a name="id2530628"></a><p class="title"><b>Figure 17. Autre exemple IoC [JOUP]</b></p><div class="figure-contents"><div><img src="dip-joup.png" alt="Autre exemple IoC [JOUP]"></div></div></div><br class="figure-break"><p>Voici un exemple d'implémentation : </p><pre class="programlisting">
+class Compte {
+  private TypeCompte _typec;
+  
+  public Compte(String typeCompte) throws Exception {
+     Class c = Class.forName(typeCompte);
+     this._typec = (TypeCompte) c.newInstance();
+  }
+  
+  pubic void deposer (float montant){
+     this._typec.deposer(montant);
+  }
+}
+
+interface TypeCompte {
+  void deposer(float montant);
+}
+
+class CompteEpargne implements TypeCompte {
+  public void deposer(float montant){
+    System.out.println();
+    System.out.println("Montant déposé sur le compte épargne : " + montant);
+    System.out.println();
+    System.out.println();
+  }
+}  
+ 
+class CompteCheque implements TypeCompte {
+  public void deposer(float montant){
+    System.out.println();
+    System.out.println("Montant déposé sur le compte chèque : " + montant);
+    System.out.println();
+    System.out.println();
+  }
+}
+</pre><p>On constate que le couplage abstrait est respecté. Le lien entre un objet de la classe Compte et objet de type TypeCompte est réalisé par une simple chaine de caractères passée au constructeur de Compte. Le schéma est : </p><pre class="programlisting">
+Class c = Class.forName(&lt;nom d'une classe enfant&gt;);
+&lt;Une classe parent&gt; ancetre = (&lt;Une classe parent&gt;) c.newInstance();
+</pre><p>Toute fois cette approche nécessite, pour des questions de sécurité, de prendre quelques précautions. En général, on applique quelques unes des idées présentées par les designs patterns de type Créateur (<span class="emphasis"><em>factory</em></span>).</p><div class="itemizedlist"><p class="title"><b>Exercice</b></p><ul type="circle"><li><p>Concevoir un programme (en mode console) qui crée un compte chèque et y dépose 300 euro, puis 200 euro sur un compte epargne.</p></li></ul></div></li></ul></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2530728"></a>3.5. Remarque</h3></div></div></div><p>Il existe une relation étroite entre ces trois principes. DIP, associé à LSP,  nous explique comment adhérer à OCP. En effet, les parties fermées (OCP) doivent s'appuyer sur des interfaces (IoC Principle) clairement exprimées et correctement réalisées (LSP).
+
+</p><div class="figure"><a name="id2530745"></a><p class="title"><b>Figure 18. Les trois grands principes </b></p><div class="figure-contents"><div><img src="ocpdiplsp.png" alt="Les trois grands principes"></div></div></div><br class="figure-break"></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2530757"></a>3.6. Principe de séparation des interfaces</h3></div></div></div><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>Principe de séparation des interfaces ---<span class="emphasis"><em>Interface Segregation Principle - ISP</em></span></em></span></p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: ISP"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left">ISP</th></tr><tr><td align="left" valign="top"><pre class="programlisting"><span class="emphasis"><em>
+
+Les clients ne doivent pas être forcés de dépendre d'interfaces qu'ils n'utilisent pas.
+
+</em></span></pre></td></tr></table></div><p>Les opérations d'une interface doivent servir le même but.</p><div class="figure"><a name="id2530796"></a><p class="title"><b>Figure 19. Application d'ISP</b></p><div class="figure-contents"><div><img src="isp.png" alt="Application d'ISP"></div></div></div><br class="figure-break"></li><li><p><span class="emphasis"><em>Quand appliquer ISP ?</em></span></p><p>Lors de la création d'une interface, ISP aide à mettre met l'accent sur sa cohérence.</p></li><li><p><span class="emphasis"><em>Technique utilisée</em></span></p><p>Création d'interfaces et héritage multiple.</p></li></ul></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2530836"></a>3.7. Principe de Réutilisation par Composition</h3></div></div></div><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>Principe de Réutilisation par Composition ---<span class="emphasis"><em>Composite Reuse Principle - CRP</em></span></em></span></p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: CRP"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left">CRP</th></tr><tr><td align="left" valign="top"><pre class="programlisting"><span class="emphasis"><em>
+
+Préférer la composition d'objets à l'héritage de classes.
+
+</em></span></pre></td></tr></table></div><p>Ce principe est discuté pour la première fois dans Gof. Les développeurs ont tendance à abuser de l'héritage d'implémentation.</p></li><li><p><span class="emphasis"><em>Quand appliquer CRP ?</em></span></p><p>Prenons le problème à l'envers. Coad a défini 5 règles qui doivent être toutes vérifiées pour une bonne utilisation de l'héritage :</p><div class="orderedlist"><ol type="1"><li><p>La relation de sous-type est « <span class="quote">est une sorte spéciale de</span> » et non « <span class="quote">est un rôle joué par un</span> ».</p></li><li><p>Un objet de la classe n'a jamais besoin de transmuter (changer de classe).</p></li><li><p>La sous-classe étend mais ne nullifie pas les comportements hérités.</p></li><li><p>Ne pas sous-classer pour de simples raisons pratiques, pour simplifier des problèmes techniques.</p></li><li><p>A l'intérieur du domaine du problème, la relation est « <span class="quote">est une sorte spéciale de {rôles, transactions ou choses}</span> ».</p></li></ol></div><p>Si l'ensemble de ces 5 règles n'est pas vérifié, alors la délégation (composition d'objets) doit être préférée à l'héritage.</p></li><li><p><span class="emphasis"><em>Technique utilisée</em></span></p><p>Délégation.</p><div class="figure"><a name="id2530961"></a><p class="title"><b>Figure 20. Exemple de non respect de CRP</b></p><div class="figure-contents"><div><img src="avantCRP.png" alt="Exemple de non respect de CRP"></div></div></div><br class="figure-break"><p> </p><pre class="programlisting">
+abstract class Employe {
+  ...
+  abstract public float getSalaire()
+}
+
+class Developpeur extends Employe {
+  public float getSalaire() { ... }
+  ...
+}
+
+class ChefDeProjet extends Employe {
+  public float getSalaire() { ... }
+  ...
+}
+
+</pre><p>Vérifions les règles :</p><div class="orderedlist"><ol type="1"><li><p> Faux</p></li><li><p> Hum...</p></li><li><p>Vrai</p></li><li><p>Vrai</p></li><li><p>Vrai</p></li></ol></div><p>3 critères sur 5.</p><div class="figure"><a name="id2531022"></a><p class="title"><b>Figure 21. Exemple de respect de CRP</b></p><div class="figure-contents"><div><img src="apresCRP.png" alt="Exemple de respect de CRP"></div></div></div><br class="figure-break"><p> </p><pre class="programlisting">
+class Employe {
+  <span class="emphasis"><em>EmploiType emploi;</em></span>
+  float getSalaire() { return emploi.getSalaire(); }
+  ...
+}
+
+<span class="emphasis"><em>interface EmploiType</em></span> {
+  public float getSalaire();
+}
+
+class Developpeur <span class="emphasis"><em>implements EmployeType</em></span> {
+  public float getSalaire() { ... }
+  ...
+}
+
+class ChefDeProjet <span class="emphasis"><em>implements EmployeType</em></span> {
+  public float getSalaire() { ... }
+  ...
+}
+</pre></li></ul></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2531062"></a>3.8. Exercice</h3></div></div></div><p>Voici un programme qui construit une page HTML représentant les caractères affichables de la table ASCII (code 32 à 127), accompagnés de leur valeur ordinale exprimée en base dix ou deux, selon l'argument fourni par l'utilisateur.</p><pre class="programlisting">
+
+class TableAsciiToHTML {
+  private char typeRepr;
+
+
+  public TableAsciiToHTML(String typeRepr) {
+    this.typeRepr= (typeRepr == null) ? 'd' : typeRepr.charAt(0);
+    printHTML();
+  }
+
+  private void printHTML() {
+    int deb = 32;
+    int fin = 128;
+    int nbCol = 10;
+    int cpt = 0;
+    System.out.println("&lt;html&gt;&lt;head /&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;TABLE DE CARACTERES&lt;/h1&gt;");
+    System.out.println("&lt;table border="1"&gt;");
+    for (int i = deb; i &lt; fin; i++, cpt++) {
+      if (cpt%nbCol == 0) {
+         if (i&gt;deb)  System.out.println("&lt;/tr&gt;");
+         System.out.println("&lt;tr&gt;");
+      }
+      System.out.println("&lt;td align=\"center\"&gt;");
+      System.out.println("&lt;table border=\"1\"&gt; &lt;tr&gt;");
+      System.out.println("&lt;td bgcolor=\"teal\" align=\"center\"&gt;");
+      switch (this.typeRepr) {
+       case 'd' :
+         System.out.println(toDecString(i));
+         break;
+       case 'b' :
+         System.out.println(toBinString(i));
+         break;
+       default :
+         System.out.println(toDecString(i));
+      }
+      System.out.println("&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;");
+      System.out.println("&lt;td bgcolor=\"#CC3300\" align=\"center\"&gt;");
+      System.out.println(" &amp;#" + i + "; &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;");
+    }
+    System.out.println("&lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;");
+  }
+
+  private String toDecString(int n) {
+     return String.valueOf(n);
+  }
+
+  private String toBinString(int n) {
+     return Integer.toBinaryString(n);
+  }
+
+}
+
+public class AppTableAscii {
+  static void main(String[] args) {
+     String arg = (args.length&gt;0) ? args[0] : null;
+     TableAsciiToHTML app = new TableAsciiToHTML(arg);
+  }
+}
+
+</pre><p>Recopier ce programme puis compiler le.</p><pre class="programlisting">
+javac AppTableAscii.java
+</pre><p>Exécuter le en redirigeant la sortie standard vers une fichier portant l'extension <span class="emphasis"><em>.html</em></span>.</p><pre class="programlisting">
+java AppTableAscii &gt; ascii.html
+</pre><p>Visualiser le résultat avec un navigateur.</p><p>Recommencer en passant une valeur ('b') en ligne de commande</p><pre class="programlisting">
+java AppTableAscii <span class="emphasis"><em>b</em></span> &gt; ascii.html
+</pre><p>Visualiser le résultat avec un navigateur.</p><p>Bon, ok, le programme fonctionne. Toute fois il n'est pas très propre, les parties extensibles ne sont pas abstraites.</p><p><span class="bold"><strong>On souhaiterait proposer de nouvelles représentations des entiers </strong></span> <span class="emphasis"><em>sans avoir à retoucher l'existant (une fois retouché bien entendu)</em></span>.</p><p>On vous demande d'appliquer OCP (et DIP) sur cet existant. La refonte de l'application ne doit pas entrainer de changement visible de son comportement, les fonctionnalités restent identiques et l'utilisateur n'y voit que du feu... Remarque : La refonte d'une partie du code d'une application, sans impact sur ses fonctionnalités est appelée <span class="emphasis"><em>Refactoring</em></span>, une activité quotidienne du développeur reconnue par eXtreme Programming.</p><p>Idée : Réaliser un couplage abstrait entre la logique de l'application (contruction d'une page HTML) et la représentation des nombres.</p><p>Objectif et test : Une fois l'application reconstruite, introduire une nouvelle représentation des valeurs ordinales en base 16, et ce sans intervenir sur le code existant de l'application.</p><p>Coad et Mayfield [Java Design] préconisent la stratégie suivante :</p><div class="orderedlist"><ol type="1"><li><p>Rechercher la caractéristique polymorphe</p></li><li><p>Identifier un ensemble de noms de méthodes correspondant à cette caractéristique</p></li><li><p>Ajouter une interface</p></li><li><p>Identifier les implémentations</p></li></ol></div></div></div><div class="sect1" lang="fr"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2531914"></a>4. Correction de l'exercice Table Ascii - OCP DIP</h2></div></div></div><p>Coad et Mayfield [Java Design] préconisent la stratégie suivante :</p><div class="orderedlist"><ol type="1"><li><p><span class="foreignphrase"><em class="foreignphrase">Rechercher la caractéristique polymorphe</em></span></p><p>Le jeu de caractères ? Possible si on étend ceux-ci au jeu UNICODE.</p><p>La représentation des valeurs ordinales de chacun des caractères affichés ? Certainement, c'est déjà ce que réalise le programme.</p><p>On retiendra donc cette dernière caractéristique : <span class="emphasis"><em>Représentation des nombres.</em></span></p></li><li><p><span class="foreignphrase"><em class="foreignphrase">Identifier un ensemble de noms de méthodes correspondant à cette caractéristique</em></span></p><p>L'objectif étant de représenter une valeur ordinales, un entier, dans une base donnée constituée de symboles, eux-même représentés sous la forme d'un caractère. Une suite ordonnée de caractères est un type bien connu (String), nous proposons de nommer l'opération : </p><pre class="programlisting">
+ String toString(int n)
+ </pre><p>Une fonction dont la valeur (une chaîne de caractère) est la représention du nombre (n) qu'elle recoit en argument.</p></li><li><p><span class="foreignphrase"><em class="foreignphrase">Ajouter une interface</em></span></p><pre class="programlisting">
+ interface Representation {
+   String toString(int n);
+ }
+</pre></li><li><p><span class="foreignphrase"><em class="foreignphrase">Identifier les implémentations</em></span></p><p>
+ Concevons les deux classes d'implémentation de l'interface <span class="foreignphrase"><em class="foreignphrase">Representation</em></span> qui réalisent la représentation en base 10 et en base 2, conformément à l'existant. Rappel, les fonctionalités qui existent avant une activité de refactoring, doivent absolument être retrouvées après la refonte du code. </p><pre class="programlisting">
+ class Decimal implements Representation {
+  public String toString(int i) {  
+      return String.valueOf(i);
+  }
+}
+
+class Binaire implements Representation {
+  public String toString(int i) {  
+     return Integer.toBinaryString(i);
+  }
+}
+ </pre><p>Modifions la partie qui décide de la représentation des nombres à appliquer (limitée actuellement à seulement deux représentations possibles) en la couplant à un objet, nommé <span class="foreignphrase"><em class="foreignphrase">repr</em></span>, de type <span class="foreignphrase"><em class="foreignphrase">Représentation</em></span>. </p><p>L'ancien code : </p><pre class="programlisting">
+
+    System.out.println("&lt;table border=\"1\"&gt; &lt;tr&gt;");
+    System.out.println("&lt;td bgcolor=\"teal\" align=\"center\"&gt;");
+    switch (this.typeRepr) {
+      case 'd' :
+         System.out.println(toDecString(i));
+         break;
+      case 'b' :
+         System.out.println(toBinString(i));
+         break;
+      default :
+         System.out.println(toDecString(i));
+    }
+    System.out.println("&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;");
+    System.out.println("&lt;td bgcolor=\"#CC3300\" align=\"center\"&gt;");
+    System.out.println(" &amp;#" + i + "; &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;");
+
+ </pre><p>Le nouveau code :</p><pre class="programlisting">
+
+    System.out.println("&lt;table border=\"1\"&gt; &lt;tr&gt;");
+    System.out.println("&lt;td bgcolor=\"teal\" align=\"center\"&gt;");
+
+    System.out.println(repr.toString(i)); 
+
+    System.out.println("&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;");
+    System.out.println("&lt;td bgcolor=\"#CC3300\" align=\"center\"&gt;");
+    System.out.println(" &amp;#" + i + "; &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;");
+
+ </pre><p>L'objet responsable de la représentation des valeurs ordinales est fournit par l'appelant à la création de l'application.</p><pre class="programlisting">
+  public TableAsciiToHTML(Representation repr) {
+      this.repr = repr;
+      printHTML();
+  }
+ </pre></li></ol></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2532097"></a>4.1. Listing de la solution</h3></div></div></div><p>
+      </p><pre class="programlisting">
+
+
+interface Representation {
+  String toString(int i);
+}
+
+class Decimal implements Representation {
+  public String toString(int i) {  
+      return String.valueOf(i);
+  }
+}
+
+class Binaire implements Representation {
+  public String toString(int i) {  
+     return Integer.toBinaryString(i);
+  }
+}
+
+class TableAsciiToHTML {
+  private Representation repr;
+
+  public TableAsciiToHTML(Representation repr) {
+      this.repr = repr;
+      printHTML();
+  }
+ 
+  private void printHTML() {
+    int deb = 32;
+    int fin = 128;
+    int nbCol = 10;
+    int cpt = 0;
+    System.out.println("&lt;html&gt;&lt;head /&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;TABLE DE CARACTERES&lt;h1&gt;");
+    System.out.println("&lt;table border=\"1\"&gt;");
+    System.out.println("&lt;tr&gt;");
+    for (int i = deb; i &lt; fin; i++, cpt++) {
+      if (cpt%nbCol == 0) {
+         if (i&gt;deb)  System.out.println("&lt;/tr&gt;");
+         System.out.println("&lt;tr&gt;");
+      }
+      System.out.println("&lt;td align=\"center\"");
+      System.out.println("&lt;table border=\"1\"&gt; &lt;tr&gt;");
+      System.out.println("&lt;td bgcolor=\"teal\" align=\"center\"&gt;");
+      
+      System.out.println(repr.toString(i));
+
+      System.out.println("&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;");
+      System.out.println("&lt;td bgcolor=\"#CC3300\" align=\"center\"&gt;");
+      System.out.println(" &amp;#" + i + "; &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;");
+    }
+    System.out.println("&lt;/table&gt;&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;");
+  }
+  
+}
+
+class AppTableAscii {
+  public static void main(String[] args) {
+     String arg = (args.length&gt;0) ? args[0] : "Decimal";
+     try {
+         Class c = Class.forName(arg);
+         Representation repr = (Representation) c.newInstance();
+         TableAsciiToHTML app = new TableAsciiToHTML(repr);
+     }
+     catch (ClassNotFoundException e) {
+       System.out.println("Erreur : " + arg + " n'est pas une classe implémentée.");
+     }
+     catch (InstantiationException e) {
+       System.out.println("Erreur : " + arg + " n'est pas n'est pas du type attendu.");
+     }
+     catch (IllegalAccessException e) {
+       System.out.println("Erreur : " + arg + " n'est pas accessible.");
+     }
+  }
+}
+      
+      </pre><p>
+    </p></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2532112"></a>4.2. Test</h3></div></div></div><p>Nous allons maintenant tester la qualité <span class="foreignphrase"><em class="foreignphrase">Ouvert-Fermé</em></span>, due au respect d'<span class="foreignphrase"><em class="foreignphrase">OCP</em></span> (POF Principe d'Ouverture/Fermeture).</p><p>Créons une nouvelle classe d'implémentation de <span class="foreignphrase"><em class="foreignphrase">Representation</em></span>.</p><pre class="programlisting">
+public class Hexadecimal implements Representation {
+  public String toString(int n) {
+    return Integer.toHexString(n);
+  }
+}
+  </pre><p>Après compilation, nous exécutons le programme en lui passant en argument le nom de cette nouvelle classe. </p><pre class="programlisting">
+  java AppTableAscii Hexadecimal &gt; res.html
+</pre><p>Le tour est joué.</p></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2532233"></a>4.3. Conclusion</h3></div></div></div><p>Nous venons d'étendre le comportement de l'application sans intervenir sur son code.</p><p>Nous avons pour cela respecté OCP (POF) et appliqué DIP (PID).</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note: Fichier de configuration XML"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left">Fichier de configuration XML</th></tr><tr><td align="left" valign="top"><p>Notez que la fonction d'instanciation "paramétrée" est très souvent déléguée à une classe spécialisée (<span class="emphasis"><em>factory</em></span>). Celle-ci puise très souvent les informations dont elle a besoin dans un (ou plusieurs) fichiers de configuration XML. Exemple (extrait d'un fichier de configuration d'une application Struts): </p><pre class="programlisting">
+
+ &lt;form-beans&gt;
+   &lt;form-bean
+      name="addQuestionForm"
+      type="org.reseaucerta.qcm.presentation.AddQuestionForm"/&gt;
+      ...
+ &lt;/form-beans&gt;
+
+ &lt;!--  Action Mapping Definitions  --&gt;
+ &lt;action-mappings&gt;
+    &lt;action path="/addQuestion"
+      type="org.reseaucerta.qcm.application.AddQuestionAction"
+      name="addQuestionForm"
+      scope="session"
+      validate="true"
+      input="/jsp/addQuestion.jsp"&gt;
+      &lt;forward
+         name="success"
+         path="/jsp/confirmAddQuestion.jsp"/&gt;
+      &lt;forward
+         name="echec"
+         path="/jsp/echecAddQuestion.jsp"/&gt;
+    &lt;/action&gt;
+    ... 
+ &lt;action-mappings&gt;
+
+</pre></td></tr></table></div></div></div><div class="sect1" lang="fr"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2531530"></a>5. Initiation au design pattern Factory</h2></div></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2531535"></a>5.1. Introduction</h3></div></div></div><p>Il existe une relation étroite entre les <span class="emphasis"><em>design patterns</em></span> (modèles de conception) et les principes de conception objet.</p><p>Qu'est-ce qu'un <span class="emphasis"><em>design pattern</em></span> ? </p><p>Un design pattern est une <span class="emphasis"><em>description d'une solution logicielle réutilisable face à un problème récurrent en développement informatique.</em></span> (Mark Grand in <span class="emphasis"><em>Patterns in Java vol. 1</em></span>).</p><p>L'origine : les modèles de construction architecturale par Christopher Alexander [1977].</p><p>Patterns logiciels : Kent Beck [1980] et Ward Cunningham [1987 et 1994].</p><p><span class="emphasis"><em>Typologie des Patterns</em></span></p><div class="itemizedlist"><ul type="disc"><li><p>Patterns d'analyse : méthodes pour faire une bonne analyse (Fowler).</p></li><li><p>Patterns de conception : solutions standard de conception (gof). </p></li><li><p>Patterns d'implémentation : façon de programmer un problème dans un langage particulier.</p></li></ul></div><p>Nous nous interessons aux patterns de conception (<span class="emphasis"><em>design patterns</em></span>).</p><p>Ouvrage de référence : </p><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>design patterns</em></span>  de Erich Gamma, Richard Heml, Ralph Johnson et John Vlissides. Ouvrage connu sous le nom de Gof (<span class="emphasis"><em>gang of four</em></span>) et disponible en français aux éditions Vuibert.</p></li></ul></div><p>Les design patterns offrent de nombreux avantages :</p><div class="itemizedlist"><ul type="disc"><li><p>Capturent l'expérience de développeurs, d'ingénieurs, d'experts.</p></li><li><p>Permettent à n'importe quel développeur de réutiliser un savoir-faire (ne pas réinventer la roue).</p></li><li><p>Donnent un nom à des éléments d'architecture (enrichissement du vocabulaire pour une meilleure communication).</p></li></ul></div><p>Les design patterns sont rangés dans des catalogues selon deux critères : le rôle (créateur, structurel, comportemantal) et le domaine (classe -statique- et objet -dynamique-) [Gof]. </p><div class="figure"><a name="id2531683"></a><p class="title"><b>Figure 22. Catalogue GOF</b></p><div class="figure-contents"><div><img src="espacePattern.png" alt="Catalogue GOF"></div></div></div><br class="figure-break"><p>D'autres catalogues sont proposés, notamment GRASP (<span class="emphasis"><em>General Responsability Assignement Software Patterns</em></span>), ou patterns généraux d'affectation des responsabilités. Ces patterns décrivent quelques principes fondamentaux en conception objet (Expert, Créateur, Faible couplage, Forte cohésion, Contrôleur). </p></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2531713"></a>5.2. Factory (Fabrique)</h3></div></div></div><p>Principe directement concerné : DIP</p><p>La mise en oeuvre du couplage abstrait, que préconise DIP, nécessite toute fois un mécanisme d'instanciation afin de lier concrètement les classes, à un moment donné. C'est le rôle des patterns créateurs, en particulier ceux de type <span class="emphasis"><em>Factory</em></span>.</p><div class="figure"><a name="id2531737"></a><p class="title"><b>Figure 23. Pattern Factory </b></p><div class="figure-contents"><div><img src="factory.png" alt="Pattern Factory"></div></div></div><br class="figure-break"><p>Les solutions les plus connues sont <span class="bold"><strong>méthode de fabrique</strong></span> (<span class="emphasis"><em>method factory</em></span>) et <span class="emphasis"><em>fabrique abstraite</em></span> (<span class="emphasis"><em>abstract factory</em></span>).</p><p>La méthode de fabrique se charge de construire une instance, par exemple en fonction d'un discriminant reçu en argument.</p><p>La fabrique abstraite utilise l'héritage (et le polymorphisme) comme discriminant. Un système très souple qui permet à un client de choisir son fournisseur de classes concrètes.</p><p>Exemple 1</p><pre class="programlisting">
+class RepresentationFactory {
+  static Representation getInstance(char typeRepr) {
+     Representation repr;
+     switch (typeRepr) {
+          case 'd' :
+             repr = new Decimal();
+             break;
+          case 'b' :
+             repr = new Binaire();
+             break;
+           default :
+             repr = new Decimal();
+     }
+     return repr;
+  }  
+}
+</pre><p>Exemple 2</p><pre class="programlisting">
+interface RepresentationFactory {
+  public Representation getInstance();
+}
+
+class ReprBinaire implements RepresentationFactory {
+  public Representation getInstance(){
+     return new Binaire();
+  }   
+}
+
+class ReprDec implements RepresentationFactory {
+  public Representation getInstance(){
+     return new Decimal();
+  }   
+}
+</pre><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>Exercices</em></span></p><p>Appliquer le pattern Factory à l'exercice TableAscii-HTML. </p></li></ul></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2532340"></a>5.3. Travaux pratiques</h3></div></div></div><p>Sujet d'après un exemple présenté par Tony Sintes sur JavaWorld.com (2002).</p><p>Considérons le besoin suivant : On souhaite offrir aux programmes écrits en java la possibilité de « <span class="quote">tracer</span> » des mesages de debogage et d'erreur soit dans un fichier soit sur la console, et ceci de manière transparente.</p><p><span class="emphasis"><em>Listing 1</em></span></p><pre class="programlisting">
+ public interface Trace {
+
+       // placer le debogage à on ou off
+       public void setDebug( boolean debug );
+
+       // ecrire un message de debug
+       public void debug( String message );
+
+       // ecrire un message d'erreur
+       public void error( String message );
+
+ }
+</pre><p>
+Supposons que nous ayons écrit deux implementations. Une implémentation (Listing 2) écrit les messages sur la console, tandis que l'autre (Listing 3) les écrit dans un fichier. 
+</p><p><span class="emphasis"><em>Listing 2</em></span></p><pre class="programlisting">
+
+ public class FileTrace implements Trace {
+           
+       private java.io.PrintWriter pw;
+       private boolean debug;
+
+       public FileTrace() throws java.io.IOException {
+             // dans une version réelle, FileTrace aurait besoin
+             // d'obtenir d'une manière ou d'une autre le nom du fichier
+             // pour cet exemple, il sera codé en dur 
+             pw = new java.io.PrintWriter( new java.io.FileWriter( "c:\trace.log" ) );
+       }
+
+       public void setDebug( boolean debug ) {
+             this.debug = debug;
+       }
+
+       public void debug( String message ) {
+             if( debug ) {  // imprimer seulement si debug est true
+                   pw.println( "DEBUG: " + message );
+                   pw.flush();
+             }
+       }
+       public void error( String message ) {
+             // toujours imprimer les erreurs
+             pw.println( "ERREUR: " + message );
+             pw.flush();
+       }
+ }
+</pre><p><span class="emphasis"><em>Listing 3</em></span></p><pre class="programlisting">
+ public class SystemTrace implements Trace {
+
+       private boolean debug;
+
+       public void setDebug( boolean debug ) {
+           this.debug = debug;
+       }
+
+       public void debug( String message ) {
+           if( debug ) {  // imprimer uniquement si debug est true
+                 System.out.println( "DEBUG: " + message );
+           }
+       }
+       public void error( String message ) {
+           System.out.println( "ERREUR: " + message );
+       }
+ }
+</pre><p>
+Pour utiliser une de ces classes, nous nous y prendions comme cela : 
+</p><p><span class="emphasis"><em>Listing 4</em></span></p><pre class="programlisting">
+
+ class Test {
+   public void run() {
+     int x = 2;
+     SystemTrace log = new SystemTrace();
+     log.debug( "debut du log" );
+     try {
+       int x = 1/(x-2);
+     }
+     catch (Exception e) {
+        log.error(e.getMessage());  
+     }
+     log.debug("Valeur de x : " + x);
+   }  
+   ...
+ }
+ </pre><p>On souhaite pouvoir changer de politique de trace (console, fichier ou autres) sans toucher au code des applications utilisant les services de trace.</p><p>Proposez une solution.</p></div></div><div class="sect1" lang="fr"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2532468"></a>6. Exemple de solution</h2></div></div></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2532473"></a>6.1. Introduction</h3></div></div></div><p>Nous devons découpler les programmes utilisateurs des fonctions de trace et les classes implémentant les services de Trace.</p><p>Nous respectons ainsi le principe ennoncé dans [Gof] : <span class="emphasis"><em>Programmer pour une interface et non pour une implémentation.</em></span></p><p><span class="emphasis"><em>Remarque : Dans la version française de [Gof], le mot « <span class="quote">développement</span> » a été préféré (?) à « <span class="quote">implementation</span> ».</em></span></p></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2532525"></a>6.2. Listing 1</h3></div></div></div><p>Dans la version proposée par l'auteur, les programmes clients délèguent entièrement le choix de la classe d'implémentation de Trace à une Factory.</p><pre class="programlisting">
+ //... some code ...
+ Trace log = traceFactory.getTrace();
+ //... code ...
+ log.debug( "entering loog" );
+ // ... etc ...
+</pre><p>Bien entendu, afin de gagner en souplesse, la <span class="emphasis"><em>factory</em></span> devra initialement être obtenu au moyen du design pattern <span class="emphasis"><em>Abstract Factory</em></span> : </p><pre class="programlisting">
+interface TraceFactory {
+   public  Trace getTrace();
+}
+</pre></div><div class="sect2" lang="fr"><div class="titlepage"><div><div><h3 class="title"><a name="id2532564"></a>6.3. Listing 3</h3></div></div></div><p>Version initiale : les traces sont réalisées sur la console.</p><pre class="programlisting">
+ public class TraceConsoleFactory implements TraceFactory {
+       public Trace getTrace() {
+             return new SystemTrace();
+       }
+ }
+</pre><p>Variante (<span class="emphasis"><em>sans intervenir sur les programmes client</em></span>) : les traces sont réalisées dans un fichier, toute fois, si cela s'avère impossible, les traces se feront sur la console.</p><pre class="programlisting">
+ public class TraceFileFactory implements TraceFactory {
+    public Trace getTrace() {
+      try {
+         return new FileTrace();
+      } catch ( java.io.IOException ex ) {
+         Trace t = new SystemTrace();
+         t.error( "could not instantiate FileTrace: " + ex.getMessage() );
+         return t;
+      }
+   }
+ }
+</pre><p>Dès lors nous pouvons imaginer une classe : </p><pre class="programlisting">
+ public class AbstracTraceFactory {
+
+    public static TraceFactory getTraceFactory()
+    throws CreateTraceFactoryException {   
+      try {
+         // recherche dans un fichier de configuration
+         // la factory à instancier 
+         // ...
+         // par exemple :
+         return new FileTraceFactory();
+         
+      } catch ( Exception ex ) {
+         throw new CreateTraceFactoryException(ex);
+      }
+
+   }
+
+ }
+</pre></div></div><div class="sect1" lang="fr"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2532631"></a>7. Conclusion</h2></div></div></div><p>Nous venons de présenter le lien qu'il existe entre des principes de conception et programmation objet et les designs patterns sur un exemple mettant en oeuvre DIP (le principe) et Factory (le pattern). </p><p>Le domaine d'application et d'étude des modèles de conception est vaste, et en continuelle évolution.</p><p>N'hésitez pas à investir ce sujet (livres et articles sur le web), et à faire un parallèle avec les principes objet sous-jacents. Vous trouverez dans le livre "Design patterns par la pratique" (en français), des auteurs A.Shalloway et J.Trott, une présentation et des exemples d'applications des modèles de conception courants.</p></div></div></body></html>
